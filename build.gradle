@@ -1,0 +1,55 @@
+buildscript {
+    repositories {
+        mavenCentral()
+//        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.7.RELEASE")
+        classpath("org.springframework:springloaded:1.2.8.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'aruaru-matome'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+//    jcenter()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+
+     // JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // Use MySQL Connector-J
+    compile 'mysql:mysql-connector-java'
+    compile('org.apache.tomcat.embed:tomcat-embed-jasper:8.5.6')
+    compile("org.mybatis:mybatis:3.2.8")
+    compile("org.mybatis:mybatis-spring:1.2.2")
+    compile("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16")
+    compile("org.codehaus.janino:janino:2.7.5")
+    compile("org.apache.commons:commons-lang3:3.3.2")
+    compile("org.projectlombok:lombok:1.14.8")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('com.jayway.jsonpath:json-path')
+}
+
+
+bootRun {
+    jvmArgs = ['-Dspring.profiles.active=develop']
+}
+
+test {
+    jvmArgs = ['-Dspring.profiles.active=develop']
+}
