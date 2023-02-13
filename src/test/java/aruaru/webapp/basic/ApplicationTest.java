@@ -1,15 +1,13 @@
 package aruaru.webapp.basic;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.boot.test.system.OutputCaptureExtension;
+import org.springframework.boot.test.system.OutputCaptureRule;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.springframework.boot.test.rule.OutputCapture;
-
+@ExtendWith(OutputCaptureExtension.class)
 public class ApplicationTest {
 
-    @Rule
-    public OutputCapture outputCapture = new OutputCapture();
+    public OutputCaptureRule outputCaptureRule = new OutputCaptureRule();
 
 //    @Test
 //    public void testApplicationProductMode() {
