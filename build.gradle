@@ -4,7 +4,7 @@ buildscript {
 //        jcenter()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.4.0")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:3.0.2")
         classpath("org.springframework:springloaded:1.2.8.RELEASE")
     }
 }
@@ -24,8 +24,8 @@ repositories {
 //    jcenter()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 17
+targetCompatibility = 17
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
