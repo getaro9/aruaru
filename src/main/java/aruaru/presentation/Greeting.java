@@ -1,5 +1,5 @@
 
-package aruaru.webapp.basic;
+package aruaru.presentation;
 
 public class Greeting {
 
