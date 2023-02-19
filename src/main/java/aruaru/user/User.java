@@ -1,16 +1,11 @@
 package aruaru.user;
 
-import aruaru.user.User.Id;
-import aruaru.user.User.Name;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
-public record User(Id id, Name name) {
+public record User(
+        @JsonUnwrapped Id id,
+        @JsonUnwrapped Name name) {
 
-    public static record Id(int id) {
-
-    }
-
-    public static record Name(String name) {
-
-    }
-
+    public static record Id(Integer id) {}
+    public static record Name(String name) {}
 }
