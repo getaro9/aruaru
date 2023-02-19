@@ -15,7 +15,7 @@ public class UserController {
     @GetMapping(value= "/get")
     public User register(HttpServletResponse response,HttpServletRequest request, Model model) {
 
-        return new User(new User.Id(1), new User.Name("user"));
+        return User.create(1, "user");
     }
 
 
