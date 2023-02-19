@@ -1,4 +1,4 @@
-package aruaru.webapp.basic;
+package aruaru;
 
 import java.text.MessageFormat;
 
@@ -6,12 +6,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
-
 @SpringBootApplication
 public class Application {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         String springProfilesActive = System.getProperty("spring.profiles.active");
         if (!StringUtils.equals(springProfilesActive, "product")
                 && !StringUtils.equals(springProfilesActive, "develop")) {

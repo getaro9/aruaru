@@ -1,5 +1,5 @@
 
-package aruaru.webapp.basic;
+package aruaru.presentation;
 
 import java.util.concurrent.atomic.AtomicLong;
 

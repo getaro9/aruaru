@@ -1,4 +1,4 @@
-package aruaru.webapp.basic.config;
+package aruaru.config;
 
 import javax.sql.DataSource;
 
