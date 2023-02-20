@@ -6,7 +6,17 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:3.0.2")
         classpath("org.springframework:springloaded:1.2.8.RELEASE")
+        // DomaでDBの設定情報を取得してコード生成するときに必要
+        classpath("org.postgresql:postgresql:42.5.4")
     }
+}
+
+
+plugins {
+  // specify the Doma CodeGen Plugin with correct version
+  id 'org.domaframework.doma.codegen' version '2.0.0'
+  id 'org.domaframework.doma.compile' version '2.0.0'
+  id 'com.diffplug.eclipse.apt' version '3.40.0'
 }
 
 apply plugin: 'java'
@@ -38,6 +48,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.postgresql:postgresql:42.5.4'
 
+    // Doma
+    implementation 'org.seasar.doma.boot:doma-spring-boot-starter:1.7.0'
+    annotationProcessor "org.seasar.doma:doma-processor:2.53.1"
+
     implementation("org.springframework.boot:spring-boot-starter-log4j2")
 
     implementation("org.apache.commons:commons-lang3:3.3.2")
@@ -58,4 +72,32 @@ bootRun {
 
 test {
     jvmArgs = ['-Dspring.profiles.active=develop']
+}
+
+domaCodeGen {
+  // make an arbitrary named block
+  dev {
+    // JDBC url
+    url = 'jdbc:postgresql://localhost:5433/aruaru'
+    // JDBC user
+    user = 'aruaru'
+    // JDBC password
+    password = 'aruaru'
+    // 自動生成対象のテーブル名を正規表現で絞る
+    tableNamePattern = '.*user.*'
+    // configuration for generated entity source files
+    entity {
+      packageName = 'aruaru.user.entity'
+      useAccessor = true
+      useListener = false
+      useMetamodel = false
+      useMappedSuperclass = false
+      var mappingFile = layout.projectDirectory.file("$projectDir/codegen-name-mapping.properties")
+      entityPropertyClassNamesFile.set(mappingFile)
+    }
+    // configuration for generated DAO source files
+    dao {
+      packageName = 'aruaru.user.dao'
+    }
+  }
 }

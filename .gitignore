@@ -1,3 +1,5 @@
 /.gradle/
 /bin/
 /build/
+/.apt_generated/
+/.apt_generated_tests/
