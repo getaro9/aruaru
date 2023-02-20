@@ -27,13 +27,16 @@ repositories {
 sourceCompatibility = 17
 targetCompatibility = 17
 
+
+
 dependencies {
+    // Web
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation('org.apache.tomcat.embed:tomcat-embed-jasper:10.1.5')
 
-
+    // DB
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation 'org.mariadb.jdbc:mariadb-java-client'
+    implementation 'org.postgresql:postgresql:42.5.4'
 
     implementation("org.springframework.boot:spring-boot-starter-log4j2")
 
