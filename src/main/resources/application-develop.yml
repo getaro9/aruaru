@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driverClassName: org.mariadb.jdbc.Driver
+    password: 115501
+    url: jdbc:mariadb://localhost/aruaru
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: none
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  thymeleaf:
+    cache: false
