@@ -1,10 +1,14 @@
 package aruaru.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import aruaru.user.User.Id;
+import aruaru.user.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -12,11 +16,18 @@ import jakarta.servlet.http.HttpServletResponse;
 @RequestMapping("/user")
 public class UserController {
 
-    @GetMapping(value= "/get")
-    public User register(HttpServletResponse response,HttpServletRequest request, Model model) {
+    @Autowired
+    UserRepository userRepository;
 
-        return User.create(1, "name", "password", "email");
+    @GetMapping(value = "/get")
+    public User get(HttpServletResponse response, HttpServletRequest request, Model model) {
+        return User.create(1, "name", "password", "email", "role");
     }
 
+    @GetMapping(value = "/get2/{id}")
+    public User get2(@PathVariable Integer id) {
+        User user = userRepository.selectById(new Id(id));
+        return user;
+    }
 
 }

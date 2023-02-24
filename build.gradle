@@ -76,7 +76,7 @@ test {
 
 domaCodeGen {
   // make an arbitrary named block
-  dev {
+  user {
     // JDBC url
     url = 'jdbc:postgresql://localhost:5433/aruaru'
     // JDBC user
@@ -87,7 +87,7 @@ domaCodeGen {
     tableNamePattern = '.*user.*'
     // configuration for generated entity source files
     entity {
-      packageName = 'aruaru.user.entity'
+      packageName = 'aruaru.user.infra.db.entity'
       useAccessor = true
       useListener = false
       useMetamodel = false
@@ -97,7 +97,8 @@ domaCodeGen {
     }
     // configuration for generated DAO source files
     dao {
-      packageName = 'aruaru.user.dao'
+      packageName = 'aruaru.user.infra.db.dao'
     }
   }
 }
+
