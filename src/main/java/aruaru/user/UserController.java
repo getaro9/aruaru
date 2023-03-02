@@ -30,4 +30,11 @@ public class UserController {
         return user;
     }
 
+    @GetMapping(value = "/register")
+    public User get3() {
+        User user= User.create(null, "name", "password", "email", "一般ユーザー");
+        User reUser = userRepository.save(user);
+        return reUser;
+    }
+
 }

@@ -19,6 +19,10 @@ public interface UserMDao {
     @Select
     UserDto selectUserDtoById(Integer userId);
 
+
+    @Insert(sqlFile = true)
+    int insertUserDto(UserDto userDto);
+
     /**
      * @param userId
      * @return the UserM entity

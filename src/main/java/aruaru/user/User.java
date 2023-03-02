@@ -2,6 +2,9 @@ package aruaru.user;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
+import lombok.With;
+
+@With
 public record User(
         @JsonUnwrapped Id id,
         @JsonUnwrapped Name name,
