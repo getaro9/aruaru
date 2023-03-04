@@ -1,0 +1,4 @@
+<factorypath>
+    <factorypathentry kind="WKSPJAR" id="/aruaru/lib/doma-core-2.53.1.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="WKSPJAR" id="/aruaru/lib/doma-processor-2.53.1.jar" enabled="true" runInBatchMode="false"/>
+</factorypath>

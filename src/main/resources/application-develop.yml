@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/aruaru
+    # 下記を設定しないと、エラーが出る。IllegalArgumentException: jdbcUrl is required with driverClassName.
+    jdbc-url: jdbc:postgresql://localhost:5433/aruaru
+    driverClassName: org.postgresql.Driver
+    username: aruaru
+    password: aruaru
+  jpa:
+    hibernate:
+      ddl-auto: none
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  thymeleaf:
+    cache: false
+
+doma:
+  dialect: postgres
+  naming: SNAKE_LOWER_CASE
