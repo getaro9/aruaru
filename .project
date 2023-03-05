@@ -19,8 +19,8 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1678034851469</id>
-			<name>container/postgres/log</name>
+			<id>1678036303556</id>
+			<name>container</name>
 			<type>30</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
