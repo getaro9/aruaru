@@ -1,0 +1,36 @@
+version: "3.8" #スキーマバージョンの定義
+services: #実行したいサービス(またはコンテナ)一覧を定義
+  db: #サービス名
+    build: #構築時に適用するオプション
+      context: .
+      dockerfile: Dockerfile-postgres
+    #working_dir: /srv #作業ディレクトリの指定
+    ports: #ホスト側:コンテナ側 でポートを指定
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: aruaru
+      POSTGRES_PASSWORD: aruaru
+      POSTGRES_DB: aruaru
+    #  PGDATA: /var/lib/postgresql/data/pgdata
+    command: >
+      postgres
+      -c log_directory=/var/lib/postgresql/log
+      -c logging_collector=on
+      -c log_min_duration_statement=1
+      -c log_statement=none
+      -c log_connections=on
+      -c log_disconnections=on
+      -c log_timezone='Asia/Tokyo'
+      -c shared_preload_libraries=pg_statsinfo
+      -c pg_statsinfo.target_server='port=5432 dbname=aruaru user=aruaru'
+      -c pg_statsinfo.repository_server='port=5432 dbname=aruaru user=aruaru'
+      -c pg_statsinfo.snapshot_interval=10min
+    #tty: true #コンテナが正常終了せず、起動したままになる
+    volumes: #ローカルファイルをDockerコンテナ内にマウントし、データを永続化する
+      #[ソース:]ターゲット[:モード]
+      - ./postgres/initdb:/docker-entrypoint-initdb.d
+      - ./postgres/log:/var/lib/postgresql/log
+    #  - ./postgres/data:/var/lib/postgresql/data
+
+volumes:
+    dumps:
