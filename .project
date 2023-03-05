@@ -17,4 +17,14 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
 	</natures>
+	<filteredResources>
+		<filter>
+			<id>1678034851469</id>
+			<name>container/postgres/log</name>
+			<type>30</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+			</matcher>
+		</filter>
+	</filteredResources>
 </projectDescription>
