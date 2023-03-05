@@ -1,0 +1,23 @@
+FROM postgres:14.4-alpine
+
+RUN set -eux; \
+	mkdir /usr/local/src/; \
+	cd /usr/local/src/; \
+	wget "https://github.com/ossc-db/pg_statsinfo/archive/refs/tags/14.0.tar.gz"; \
+	tar xvf 14.0.tar.gz; \
+	rm -rf 14.0.tar.gz; \
+	cd pg_statsinfo-14.0; \
+	apk --update add --no-cache --virtual .build-deps \
+		make \
+		gcc \
+		musl-dev \
+		linux-headers \
+		clang \
+		llvm13 \
+	; \
+	make USE_PGXS=1; \
+	make USE_PGXS=1 install; \
+
+#ARG DB_LANG=en_US
+#RUN localedef -i $DB_LANG -c -f UTF-8 -A /usr/share/locale/locale.alias $DB_LANG.UTF-8
+#ENV LANG $DB_LANG.utf8

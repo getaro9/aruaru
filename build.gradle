@@ -4,7 +4,7 @@ buildscript {
 //        jcenter()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:3.0.2")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:3.0.3")
         classpath("org.springframework:springloaded:1.2.8.RELEASE")
         // DomaでDBの設定情報を取得してコード生成するときに必要
         classpath("org.postgresql:postgresql:42.5.4")
@@ -21,6 +21,7 @@ plugins {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
@@ -56,6 +57,9 @@ dependencies {
 
     implementation("org.apache.commons:commons-lang3:3.3.2")
 
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.26'
+
+
     // Test
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('com.jayway.jsonpath:json-path')
@@ -75,6 +79,8 @@ test {
 }
 
 domaCodeGen {
+
+
   // make an arbitrary named block
   user {
     // JDBC url
@@ -100,5 +106,25 @@ domaCodeGen {
       packageName = 'aruaru.user.infra.db.dao'
     }
   }
+
 }
 
+// MavenのPOM生成用
+publishing {
+    publications {
+        customLibrary(MavenPublication) {
+            groupId = 'com.aruaru.sample'
+            artifactId = 'aruaru-matome'
+            version = '0.1.0'
+
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'sampleRepo'
+            url = layout.buildDirectory.dir("repo")
+        }
+    }
+}
