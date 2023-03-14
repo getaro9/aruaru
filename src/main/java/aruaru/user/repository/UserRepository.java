@@ -19,7 +19,7 @@ public class UserRepository {
 
     public User selectById(aruaru.user.User.Id userId){
         UserDto userDto= userMDao.selectUserDtoById(userId.id());
-        User user = User.create(userDto.getUserId(), userDto.getUserName(), userDto.getUserPassword(), userDto.getUserEmail(), userDto.getUserRoleName());
+        User user = new User(userDto.getUserId(), userDto.getUserName(), userDto.getUserPassword(), userDto.getUserEmail(), userDto.getUserRoleName());
         return user;
     };
 

@@ -24,7 +24,7 @@ public class UserController {
 
     @GetMapping(value = "/register")
     public User get3() {
-        User user= User.create(null, "name", "password", "email", "一般ユーザー");
+        User user= new User(null, "name", "password", "email", "一般ユーザー");
         User reUser = userRepository.save(user);
         return reUser;
     }
