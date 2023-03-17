@@ -19,3 +19,15 @@ spring:
 doma:
   dialect: postgres
   naming: SNAKE_LOWER_CASE
+
+logging:
+  level:
+    root: INFO
+    '[com.zaxxer.hikari]': INFO
+    '[org.seasar.doma]': TRACE
+#    '[org.slf4j]': DEBUG
+#    '[org.springframework.jdbc]': DEBUG
+
+aruaru:
+  web:
+    root-uri: http://localhost:8080

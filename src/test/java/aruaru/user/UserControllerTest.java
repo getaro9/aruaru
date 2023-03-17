@@ -5,7 +5,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.junit.jupiter.api.Test;
@@ -13,14 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -51,6 +47,7 @@ class UserControllerTest {
             "{\"id\":1,\"name\":\"TestUser1\",\"password\":\"TestUser1Password\",\"email\":\"testuser1@email.com\",\"role\":\"システム管理者\"}"));
   }
 
+  // usrIdは自動生成で登録されるので99にはならない
   @Test
   void post() throws URISyntaxException {
 
@@ -59,14 +56,13 @@ class UserControllerTest {
 
     User user = new User(99, "name", "password", "email", "一般ユーザー");
 
-    RequestEntity<User> reqEntity = new RequestEntity<User>(user, (MultiValueMap) headers, HttpMethod.POST,
-        new URI("http://localhost:8080/users"));
-
+    RequestEntity<User> reqEntity = RequestEntity.post("/users").headers(headers).body(user);
     ResponseEntity<User> response = restTemplate.exchange(reqEntity, User.class);
 
     // 結果の取得
-    User resJsonMap = response.getBody();
-    System.out.println(resJsonMap);
+    System.out.println(response.getStatusCode());
+    System.out.println(response.getHeaders());
+    System.out.println(response.getBody());
   }
 
   @Test
