@@ -23,7 +23,7 @@ public class UserRepository {
         return user;
     };
 
-    public User save(User user){
+    public User insert(User user){
 
         UserDto userDto = new UserDto();
         userDto.setUserName(user.name().name());
@@ -37,5 +37,22 @@ public class UserRepository {
         User reUser= user.withId(new User.Id(userId));
 
         return reUser;
+    };
+
+    public User update(User user) {
+
+      UserDto userDto = new UserDto();
+      userDto.setUserId(user.id().id());
+      userDto.setUserName(user.name().name());
+      userDto.setUserPassword(user.password().password());
+      userDto.setUserEmail(user.email().email());
+      userDto.setUserRoleName(user.role().role());
+
+      int result = userMDao.updateUserDto(userDto);
+      int userId = userMDao.currentId();
+
+      User reUser = user.withId(new User.Id(userId));
+
+      return reUser;
     };
 }

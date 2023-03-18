@@ -30,14 +30,20 @@ public class UserController {
 
     @GetMapping(value = "/{id}")
     public User getUserById(@PathVariable Integer id) {
-        User user = userRepository.selectById(new Id(id));
-        return user;
+      User user = userRepository.selectById(new Id(id));
+      return user;
     }
 
     @PostMapping
     public ResponseEntity<User> register(@RequestBody User user) {
-      User reUser = userRepository.save(user);
+      User reUser = userRepository.insert(user);
       URI location = UriComponentsBuilder.fromUriString(rootUri + "/users/" + reUser.id().id()).build().toUri();
       return ResponseEntity.created(location).body(reUser);
+    }
+
+    @PutMapping
+    public User update(@RequestBody User user) {
+      User reUser = userRepository.update(user);
+      return reUser;
     }
 }

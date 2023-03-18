@@ -66,6 +66,23 @@ class UserControllerTest {
   }
 
   @Test
+  void put() throws URISyntaxException {
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+
+    User user = new User(1, "TestUser1", "TestUser1Password", "testuser1@email.com", "システム管理者");
+
+    RequestEntity<User> reqEntity = RequestEntity.put("/users").headers(headers).body(user);
+    ResponseEntity<User> response = restTemplate.exchange(reqEntity, User.class);
+
+    // 結果の取得
+    System.out.println(response.getStatusCode());
+    System.out.println(response.getHeaders());
+    System.out.println(response.getBody());
+  }
+
+  @Test
   void serialize() throws URISyntaxException, JsonProcessingException {
     User user = new User(99, "name", "password", "email", "一般ユーザー");
 
