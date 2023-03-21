@@ -42,12 +42,8 @@ public interface UserMDao {
     @Insert
     int insert(UserM entity);
 
-    /**
-     * @param entity
-     * @return affected rows
-     */
-    @Update
-    int update(UserM entity);
+    @Update(sqlFile = true)
+    int updateUserDto(UserDto userDto);
 
     /**
      * @param entity

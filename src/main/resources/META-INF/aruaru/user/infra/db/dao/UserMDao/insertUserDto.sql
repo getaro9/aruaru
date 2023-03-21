@@ -1,4 +1,4 @@
-INSERT  INTO user_m
+INSERT INTO user_m
     (user_id , user_name, user_email, user_role_id, user_password, created_at, updated_at)
   VALUES
     (
